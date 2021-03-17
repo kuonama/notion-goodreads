@@ -1,253 +1,46 @@
-<!DOCTYPE html>
-<html lang="en" >
-
-<head>
-
-  <meta charset="UTF-8">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  
-<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
-<meta name="apple-mobile-web-app-title" content="CodePen">
-
-<link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
-
-<link rel="mask-icon" type="" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
-
-
-  <title>CodePen - beige text clock</title>
-  
-  
-  
-  
-<style>
-p, span{
-	color: #B89C82;
-	transition: color 0.4s ease-out;
-	-ms-transition: color 0.4s ease-out;
-    -moz-transition: color 0.4s ease-out;
-    -webkit-transition: color 0.4s ease-out;
-	letter-spacing: 12.1px;
-	font-size: 17px; 
-}
-
-#midnight{
-	color: #B89C82;
-	letter-spacing: 23px;
-}
-
-#it, #is, span.active{
-	color: #fff !important;
-	transition: color 0.4s ease-out;
-	-ms-transition: color 0.4s ease-out;
-    -moz-transition: color 0.4s ease-out;
-    -webkit-transition: color 0.4s ease-out;
-}
-
-#text-clock{
-  background: #DCBEA1;
-  padding-left: 40px;
-  padding-right: 30px;
-	width: 260px;
-  height: 424px;
-  padding-top: 1px;
-	position: absolute;
-  zoom: 0.8;
-	left: 50%;
-	top: 50%;
-	-webkit-transform: translate(-50%, -50%);
-	-moz-transform: translate(-50%, -50%);
-	-o-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
-	text-transform: uppercase;
-  color: #fff;
-	font-family: Helvetica, Arial;
-	pointer-events: none;
-  -webkit-user-select: none;
-}
-
-#line-1, #line-1 span{
-	letter-spacing: 13.9px;
-}
-#line-2, #line-2 span{
-	letter-spacing: 11.3px;
-}
-#line-7, #line-7 span{
-	letter-spacing: 11.8px;
-}
-#line-8, #line-8 span{
-	letter-spacing: 12.3px;
-}
-#line-9, #line-9 span{
-	letter-spacing: 11.6px;
-}
-#line-10, #line-10 span{
-	letter-spacing: 11.6px;
-}
-
-.hidden{
-	display: none;
-}
-</style>
-
-  
-  
-  
-  
-
-</head>
-
-<body translate="no" >
-  <!--
- DOWNLOAD ME HERE: 
- https://chrome.google.com/webstore/detail/text-clock/caacmmeopdailkdlgkimndodjipilaha
--->
-<div id="text-clock">
-  <!-- line 1 -->
-  <p id="line-1">
-    <span id="it" class="active">IT</span>L<span id="is" class="active">IS</span>AS<span id="tgif">GTFI</span>
-  </p>
-  <!-- line 2 -->
-  <p id="line-2">
-    AC<span id="quarter" class="desc">QUARTER</span>BS
-  </p>
-  <!-- line 3 -->
-  <p>
-    <span id="twenty" class="desc">TWENTY</span><span id="five" class="desc">FIVE</span>X
-  </p>
-  <!-- line 4 -->
-  <p>
-    <span id="half" class="desc">HALF</span>B<span id="ten" class="desc">TEN</span>F<span id="to" class="desc">TO</span>
-  </p>
-  <!-- line 5 -->
-  <p>
-    <span id="past" class="desc">PAST</span>ERU<span id="nine" class="hr">NINE</span>
-  </p>
-  <!-- line 6 -->
-  <p>
-    <span id="one" class="hr">ONE</span><span id="six" class="hr">SIX</span><span id="three" class="hr">THREE</span>
-  </p>
-  <!-- line 7 -->
-  <p id="line-7">
-    <span id="four" class="hr">FOUR</span><span id="five-hr" class="hr">FIVE</span><span id="two" class="hr">TWO</span>
-  </p>
-  <!-- line 8 -->
-  <p id="line-8">
-    <span id="eight" class="hr">EIGHT</span><span id="eleven" class="hr">ELEVEN</span>
-  </p>
-  <!-- line 9 -->
-  <p id="line-9">
-    <span id="seven" class="hr">SEVEN</span><span id="twelve" class="hr">TWELVE</span>
-  </p>
-  <!-- line 10 -->
-  <p id="line-10">
-    <span id="ten-hr" class="hr">TEN</span>SE<span id="oclock" class="desc">OCLOCK</span>
-  </p>
-  <!-- line 11 -->
-  <p id="line-11">
-    <span id="midnight" class="hr">MIDNIGHT</span>
-  </p>
-</div>
-  
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-      <script id="rendered-js" >
-function textClock() {
-
-    var newDate = new Date(),
-        day = newDate.getDay(),
-        hours = newDate.getHours(),
-        minutes = newDate.getMinutes().toString(),
-        seconds = newDate.getSeconds().toString();
-
-    if (hours > 12 && hours !== 0 && hours !== 23) {
-        hours = hours - 12;
-    }
-    if (minutes < 10) {
-        minutes = 0 + minutes;
-    }
-    if (seconds < 10) {
-        seconds = 0 + seconds;
-    }
-
-    var minsSecs = minutes + seconds;
-    if (minsSecs > 3230) {
-        hours++;
-    }
-
-    if (day == 5) {
-        $('#tgif').html('TGIF');
-    }
-
-    hoursObj = {
-        1: '#one',
-        2: '#two',
-        3: '#three',
-        4: '#four',
-        5: '#five-hr',
-        6: '#six',
-        7: '#seven',
-        8: '#eight',
-        9: '#nine',
-        10: '#ten-hr',
-        11: '#eleven',
-        12: '#twelve',
-        23: '#eleven',
-        24: '#midnight',
-        0: '#midnight'
-    };
-
-    updateHour(hoursObj[hours]);
-
-    if ((minsSecs >= 5730 && minsSecs < 6000) || (minsSecs >= 0 && minsSecs < 230)) {
-        if (hours !== 24 && hours !== 0) {
-            updateDesc('#oclock');
+      <style type="text/css" media="screen">
+        .gr_grid_container {
+          /* customize grid container div here. eg: width: 500px; */
         }
-    } else if (minsSecs >= 230 && minsSecs < 730) {
-        updateDesc('#five, #past');
-    } else if (minsSecs >= 730 && minsSecs < 1230) {
-        updateDesc('#ten, #past');
-    } else if (minsSecs >= 1230 && minsSecs < 1730) {
-        updateDesc('#quarter, #past');
-    } else if (minsSecs >= 1730 && minsSecs < 2230) {
-        updateDesc('#twenty, #past');
-    } else if (minsSecs >= 2230 && minsSecs < 2730) {
-        updateDesc('#twenty, #five, #past');
-    } else if (minsSecs >= 2730 && minsSecs < 3230) {
-        updateDesc('#half, #past');
-    } else if (minsSecs >= 3230 && minsSecs < 3730) {
-        updateDesc('#twenty, #five, #to');
-    } else if (minsSecs >= 3730 && minsSecs < 4230) {
-        updateDesc('#twenty, #to');
-    } else if (minsSecs >= 4230 && minsSecs < 4730) {
-        updateDesc('#quarter, #to');
-    } else if (minsSecs >= 4730 && minsSecs < 5230) {
-        updateDesc('#ten, #to');
-    } else if (minsSecs >= 5230 && minsSecs < 5730) {
-        updateDesc('#five, #to');
-    } else {
-        updateDesc();
-    }
-}
 
-function updateDesc(classes) {
-    $('.desc').removeClass('active');
-    $(classes).addClass('active');
-}
+        .gr_grid_book_container {
+          /* customize book cover container div here */
+          float: left;
+          width: 98px;
+          height: 160px;
+          padding: 0px 0px;
+          overflow: hidden;
+        }
+      </style>
+      <div id="gr_grid_widget_1615985606">
+        <!-- Show static html as a placeholder in case js is not enabled - javascript include will override this if things work -->
+            <h2>
+      <a style="text-decoration: none;" rel="nofollow" href="https://www.goodreads.com/review/list/51317552-anouk?shelf=to-read&utm_medium=api&utm_source=grid_widget">to-read</a>
+    </h2>
+  <div class="gr_grid_container">
+    <div class="gr_grid_book_container"><a title="Daughter of Smoke & Bone (Daughter of Smoke & Bone, #1)" rel="nofollow" href="https://www.goodreads.com/book/show/8490112-daughter-of-smoke-bone"><img alt="Daughter of Smoke & Bone" border="0" src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1461353773l/8490112._SX98_.jpg" /></a></div>
+    <div class="gr_grid_book_container"><a title="Children of Blood and Bone (Legacy of Orïsha, #1)" rel="nofollow" href="https://www.goodreads.com/book/show/34728667-children-of-blood-and-bone"><img alt="Children of Blood and Bone" border="0" src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1516127989l/34728667._SX98_.jpg" /></a></div>
+    <div class="gr_grid_book_container"><a title="The City of Brass (The Daevabad Trilogy, #1)" rel="nofollow" href="https://www.goodreads.com/book/show/32718027-the-city-of-brass"><img alt="The City of Brass" border="0" src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1491417547l/32718027._SX98_.jpg" /></a></div>
+    <div class="gr_grid_book_container"><a title="An Ember in the Ashes (An Ember in the Ashes, #1)" rel="nofollow" href="https://www.goodreads.com/book/show/27774758-an-ember-in-the-ashes"><img alt="An Ember in the Ashes" border="0" src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1519425615l/27774758._SX98_.jpg" /></a></div>
+    <div class="gr_grid_book_container"><a title="Bone Crier's Moon (Bone Grace, #1)" rel="nofollow" href="https://www.goodreads.com/book/show/46249012-bone-crier-s-moon"><img alt="Bone Crier's Moon" border="0" src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1560367799l/46249012._SX98_.jpg" /></a></div>
+    <div class="gr_grid_book_container"><a title="An Affair of Poisons" rel="nofollow" href="https://www.goodreads.com/book/show/40046019-an-affair-of-poisons"><img alt="An Affair of Poisons" border="0" src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1537805579l/40046019._SX98_.jpg" /></a></div>
+    <div class="gr_grid_book_container"><a title="Kingdom of the Wicked (Kingdom of the Wicked, #1)" rel="nofollow" href="https://www.goodreads.com/book/show/52735921-kingdom-of-the-wicked"><img alt="Kingdom of the Wicked" border="0" src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1578938260l/52735921._SX98_SY160_.jpg" /></a></div>
+    <div class="gr_grid_book_container"><a title="Winterkeep (Graceling Realm, #4)" rel="nofollow" href="https://www.goodreads.com/book/show/53624358-winterkeep"><img alt="Winterkeep" border="0" src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1600268464l/53624358._SX98_.jpg" /></a></div>
+    <div class="gr_grid_book_container"><a title="Ninth House (Alex Stern, #1)" rel="nofollow" href="https://www.goodreads.com/book/show/43263680-ninth-house"><img alt="Ninth House" border="0" src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1553102141l/43263680._SX98_.jpg" /></a></div>
+    <div class="gr_grid_book_container"><a title="The Gilded Ones (Deathless, #1)" rel="nofollow" href="https://www.goodreads.com/book/show/40024121-the-gilded-ones"><img alt="The Gilded Ones" border="0" src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1585578175l/40024121._SX98_.jpg" /></a></div>
+    <div class="gr_grid_book_container"><a title="Untitled (Legendborn, #2)" rel="nofollow" href="https://www.goodreads.com/book/show/40035666-untitled"><img alt="Untitled" border="0" src="https://s.gr-assets.com/assets/nophoto/book/111x148-bcc042a9c91a29c1d680899eff700a03.png" /></a></div>
+    <div class="gr_grid_book_container"><a title="Fable (Fable, #1)" rel="nofollow" href="https://www.goodreads.com/book/show/44012880-fable"><img alt="Fable" border="0" src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1590354131l/44012880._SX98_.jpg" /></a></div>
+    <div class="gr_grid_book_container"><a title="Gods & Monsters (Serpent & Dove, #3)" rel="nofollow" href="https://www.goodreads.com/book/show/52535769-gods-monsters"><img alt="Gods & Monsters" border="0" src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1612546028l/52535769._SX98_.jpg" /></a></div>
+    <div class="gr_grid_book_container"><a title="Rule of Wolves (King of Scars, #2)" rel="nofollow" href="https://www.goodreads.com/book/show/36307674-rule-of-wolves"><img alt="Rule of Wolves" border="0" src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1598133584l/36307674._SX98_.jpg" /></a></div>
+    <div class="gr_grid_book_container"><a title="Dance of Thieves (Dance of Thieves, #1)" rel="nofollow" href="https://www.goodreads.com/book/show/35796008-dance-of-thieves"><img alt="Dance of Thieves" border="0" src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1505930101l/35796008._SX98_.jpg" /></a></div>
+    <div class="gr_grid_book_container"><a title="We Hunt the Flame (Sands of Arawiya, #1)" rel="nofollow" href="https://www.goodreads.com/book/show/36492488-we-hunt-the-flame"><img alt="We Hunt the Flame" border="0" src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1551185822l/36492488._SX98_.jpg" /></a></div>
+    <div class="gr_grid_book_container"><a title="Jade City (The Green Bone Saga, #1)" rel="nofollow" href="https://www.goodreads.com/book/show/43587154-jade-city"><img alt="Jade City" border="0" src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1547625704l/43587154._SX98_.jpg" /></a></div>
+    <div class="gr_grid_book_container"><a title="The Poppy War (The Poppy War, #1)" rel="nofollow" href="https://www.goodreads.com/book/show/35068705-the-poppy-war"><img alt="The Poppy War" border="0" src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1515691735l/35068705._SX98_.jpg" /></a></div>
+    <div class="gr_grid_book_container"><a title="All the Stars and Teeth (All the Stars and Teeth, #1)" rel="nofollow" href="https://www.goodreads.com/book/show/38325332-all-the-stars-and-teeth"><img alt="All the Stars and Teeth" border="0" src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1562221314l/38325332._SX98_.jpg" /></a></div>
+    <div class="gr_grid_book_container"><a title="Lore" rel="nofollow" href="https://www.goodreads.com/book/show/53375824-lore"><img alt="Lore" border="0" src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1594222283l/53375824._SX98_.jpg" /></a></div>
+  <noscript><br/>Share <a rel="nofollow" href="/">book reviews</a> and ratings with anouk, and even join a <a rel="nofollow" href="/group">book club</a> on Goodreads.</noscript>
+  </div>
 
-function updateHour(classes) {
-    $('.hr').removeClass('active');
-    $(classes).addClass('active');
-}
+      </div>
+      <script src="https://www.goodreads.com/review/grid_widget/51317552.to-read?cover_size=medium&hide_link=true&hide_title=&num_books=50&order=d&shelf=to-read&sort=date_added&widget_id=1615985606" type="text/javascript" charset="utf-8"></script>
 
-setInterval(function() {
-    textClock();
-}, 1000);
-
-textClock();
-    </script>
-
-  
-
-</body>
-
-</html>
- 
